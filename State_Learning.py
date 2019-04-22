@@ -55,48 +55,6 @@ RL = PolicyGradientInverse(
 # print(RL_star.sess.run(tf.get_collection('policy_net_params')))
 # print(RL.sess.run(tf.get_collection('policy_net2_params')))
 # print(ca)
-#########################################  train  #######################################
-
-# for i_episode in range(3000):
-#
-#     observation = env.reset()
-#
-#     while True:
-#         if True: env.render()
-#
-#         action = RL.choose_action(observation)
-#
-#         observation_, reward, done, info = env.step(action)
-#
-#         # RL.store_transition(observation, action, reward)
-#
-#         if done:
-#             ep_rs_sum = sum(RL.ep_rs)
-#
-#             if 'running_reward' not in globals():
-#                 running_reward = ep_rs_sum
-#             else:
-#                 running_reward = running_reward * 0.99 + ep_rs_sum * 0.01
-#             if running_reward > DISPLAY_REWARD_THRESHOLD: RENDER = True     # rendering
-#
-#             # vt, loss = RL.learn(i_episode)
-#             # print("episode:"+str(i_episode)+"  reward:"+str(ep_rs_sum)+"  loss:"+str(loss))
-#
-#             # if i_episode == 0:
-#             #     plt.plot(vt)    # plot the episode vt
-#             #     plt.xlabel('episode steps')
-#             #     plt.ylabel('normalized state-action value')
-#             #     plt.show()
-#             break
-#
-#         observation = observation_
-#     # if ep_rs_sum > -200:
-#     #     break
-#
-# RL.saver.save(RL.sess, 'ckpt/model.ckpt')
-#########################################  train  #######################################
-
-
 
 #########################################  train-inverse  #######################################
 #先让老师跑m次得到范例轨迹数据D
@@ -186,41 +144,3 @@ for i_episode in range(150):
 
 RL.saver.save(RL.sess,'ckpt/model.ckpt')
 #########################################  train-inverse  #######################################
-
-
-
-#########################################  test  #######################################
-# for i_episode in range(10):
-#
-#     observation = env.reset()
-#
-#     while True:
-#         env.render()
-#
-#         action = RL.choose_action(observation)
-#
-#         observation_, reward, done, info = env.step(action)
-#
-#         RL.store_transition(observation, action, reward)
-#
-#         if done:
-#             ep_rs_sum = sum(RL.ep_rs)
-#
-#             if 'running_reward' not in globals():
-#                 running_reward = ep_rs_sum
-#             else:
-#                 running_reward = running_reward * 0.99 + ep_rs_sum * 0.01
-#             if running_reward > DISPLAY_REWARD_THRESHOLD: RENDER = True     # rendering
-#
-#             print("episode:"+str(i_episode)+"  reward:"+str(ep_rs_sum))
-#
-#             # if i_episode == 0:
-#             #     plt.plot(vt)    # plot the episode vt
-#             #     plt.xlabel('episode steps')
-#             #     plt.ylabel('normalized state-action value')
-#             #     plt.show()
-#             break
-#
-#         observation = observation_
-
-#########################################  test  #######################################

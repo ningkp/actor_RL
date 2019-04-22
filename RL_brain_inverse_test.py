@@ -15,6 +15,7 @@ gym: 0.8.0
 
 import numpy as np
 import tensorflow as tf
+import pickle
 
 # reproducible
 np.random.seed(1)
@@ -51,6 +52,10 @@ class PolicyGradientInverse:
         self.saver.restore(self.sess, 'ckpt/2019-4-19-MountainCar-inverseD/model.ckpt')
         #得到state-net的参数
         state_params = self.sess.run(tf.get_collection('state_net_params'))
+        # print(state_params)
+        # with open('piks/CartPole_state.pik', 'wb') as f:
+        #     pickle.dump(state_params, f, -1)
+        # print(ca)
         #重新初始化网络
         self.sess.run(tf.global_variables_initializer())
         # print(state_params)

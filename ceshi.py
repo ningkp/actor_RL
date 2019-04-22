@@ -1,6 +1,6 @@
 import gym
 
-env = gym.make('Pendulum-v0')
+env = gym.make('Acrobot-v1')
 
 for i_episode in range(100):
     observation = env.reset()
@@ -14,6 +14,7 @@ for i_episode in range(100):
     for t in range(100):
         env.render()
         action = env.action_space.sample()
+        print(observation)
         print(action)
         observation_, reward, done, info = env.step(action)
         if done:
