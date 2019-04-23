@@ -15,7 +15,7 @@ Current task:
         A. CartPole
         B. MountainCar
         C. GridWorld
-        D. Acrobot
+        D. Acrobot          #在actor网络上表现不好
         #E. Breakout
         #连续动作
         A. MountainCarContinuous

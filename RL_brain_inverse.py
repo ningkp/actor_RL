@@ -32,7 +32,7 @@ class PolicyGradientInverse:
         self.n_features = n_features
         self.lr = learning_rate
         self.lr_S = 0.005
-        self.n_state = 1
+        self.n_state = 3
         self.gamma = reward_decay
 
         self.ep_obs, self.ep_as, self.ep_as_star, self.ep_rs = [], [], [], []
@@ -61,7 +61,7 @@ class PolicyGradientInverse:
         with tf.variable_scope('state_net'):
             # c_names(collections_names) are the collections to store variables
             c_names_state, n_l1_state, w_initializer_state, b_initializer_state = \
-                ['state_net_params', tf.GraphKeys.GLOBAL_VARIABLES], 2, \
+                ['state_net_params', tf.GraphKeys.GLOBAL_VARIABLES], 5, \
                 tf.random_normal_initializer(0., 0.3), tf.constant_initializer(0.1)  # config of layers
 
             # first layer. collections is used later when assign to target net

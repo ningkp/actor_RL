@@ -41,7 +41,7 @@ class PolicyGradient:
 
         self.saver = tf.train.Saver()
 
-        self.saver.restore(self.sess,'ckpt/2019-4-10-MountainCar/model.ckpt')
+        self.saver.restore(self.sess,'ckpt/2019-4-22-Acrobot/model.ckpt')
 
     def _build_net(self):
         with tf.name_scope('inputs'):

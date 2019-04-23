@@ -12,6 +12,7 @@ gym: 0.8.0
 """
 #MountainCar  n_state = 1, state_net_input = 2
 #CartPole     n_state = 6, state_net_input = 8
+#Acrobot      n_state = 3, state_net_input = 5
 
 import numpy as np
 import tensorflow as tf

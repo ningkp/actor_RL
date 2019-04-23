@@ -20,14 +20,17 @@ import tensorflow as tf
 DISPLAY_REWARD_THRESHOLD = 400  # renders environment if total episode reward is greater then this threshold
 RENDER = False  # rendering wastes time
 
+TeminalReward = -50
 # env = gym.make('CartPole-v0')
-env = gym.make('MountainCar-v0')
+# env = gym.make('MountainCar-v0')
+env = gym.make('Acrobot-v1')
 env.seed(1)     # reproducible, general Policy gradient has high variance
 env = env.unwrapped
 
 #定义老师的evn
 # env_tea = gym.make('CartPole-v0')
-env_tea = gym.make('MountainCar-v0')
+# env_tea = gym.make('MountainCar-v0')
+env_tea = gym.make('Acrobot-v1')
 env_tea.seed(1)
 env_tea = env_tea.unwrapped
 
@@ -58,7 +61,7 @@ RL = PolicyGradientInverse(
 
 #########################################  train-inverse  #######################################
 #先让老师跑m次得到范例轨迹数据D
-M = 1
+M = 3
 for i in range(0, M):
     observation_tea = env_tea.reset()
     count = 0
@@ -85,7 +88,7 @@ for i in range(0, M):
 # print(RL.ep_as_star_tea.shape)
 print("获取"+str(M)+"条范例轨迹数据完成，共"+str(len(RL.ep_as_star_tea))+"个数据")
 
-for i_episode in range(150):
+for i_episode in range(1000):
 
     observation = env.reset()
     # observation_tea = env_tea.reset()
@@ -139,7 +142,7 @@ for i_episode in range(150):
         # observation_tea = observation_tea_
         count = count + 1
 
-    if ep_rs_sum > -200:
+    if ep_rs_sum > -TeminalReward:
         break
 
 RL.saver.save(RL.sess,'ckpt/model.ckpt')

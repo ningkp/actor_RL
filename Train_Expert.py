@@ -18,9 +18,12 @@ DISPLAY_REWARD_THRESHOLD = 400  # renders environment if total episode reward is
 RENDER = False  # rendering wastes time
 
 #终止奖励
-TeminalReward = -200
+TeminalReward = -50
+#终止回合
+TeminalOnce = -10000
 # env = gym.make('CartPole-v0')
-env = gym.make('MountainCar-v0')
+# env = gym.make('MountainCar-v0')
+env = gym.make('Acrobot-v1')
 env.seed(1)     # reproducible, general Policy gradient has high variance
 env = env.unwrapped
 
@@ -28,6 +31,7 @@ print(env.action_space)
 print(env.observation_space)
 print(env.observation_space.high)
 print(env.observation_space.low)
+# print(ca)
 
 RL = PolicyGradient(
     n_actions=env.action_space.n,
@@ -41,7 +45,7 @@ RL = PolicyGradient(
 # print(ca)
 #########################################  train  #######################################
 
-for i_episode in range(3000):
+for i_episode in range(1000):
 
     observation = env.reset()
 
@@ -54,8 +58,9 @@ for i_episode in range(3000):
 
         RL.store_transition(observation, action, reward)
 
-        if done:
-            ep_rs_sum = sum(RL.ep_rs)
+        ep_rs_sum = sum(RL.ep_rs)
+
+        if done or ep_rs_sum < TeminalOnce:
 
             if 'running_reward' not in globals():
                 running_reward = ep_rs_sum
@@ -85,7 +90,8 @@ RL.saver.save(RL.sess, 'ckpt/model.ckpt')
 # for i_episode in range(10):
 #
 #     observation = env.reset()
-#
+#     print(observation)
+#     ep_rs = []
 #     while True:
 #         env.render()
 #
@@ -93,10 +99,9 @@ RL.saver.save(RL.sess, 'ckpt/model.ckpt')
 #
 #         observation_, reward, done, info = env.step(action)
 #
-#         RL.store_transition(observation, action, reward)
-#
+#         ep_rs.append(reward)
 #         if done:
-#             ep_rs_sum = sum(RL.ep_rs)
+#             ep_rs_sum = sum(ep_rs)
 #
 #             if 'running_reward' not in globals():
 #                 running_reward = ep_rs_sum
