@@ -20,6 +20,8 @@ Current task:
         #连续动作
         A. MountainCarContinuous
         B. Pendulum
+        C. 2D_car
+        D. Robot_arm
         
         
     4. 在DQN上测试在Actor网络状态学习后迁移后的结果
